@@ -24,8 +24,10 @@ Route::get('/', function () {
 */
 
 Route::get('/','FrontController@index');
-Route::get('contacto','FrontController@contacto');
+Route::get('contact','FrontController@contact');
 Route::get('reviews','FrontController@reviews');
+
+Route::get('admin','FrontController@admin');
 
 Route::get('prueba', function () {
     return "Hola desde routes.php";
@@ -38,3 +40,12 @@ Route::get('nombre/{nombre}', function ($nombre) {
 Route::get('edad/{edad?}', function ($edad=10) {
     return "Mi edad es: ".$edad;
 });
+
+
+
+Route::resource('usuario','UsuarioController');
+
+
+
+
+
