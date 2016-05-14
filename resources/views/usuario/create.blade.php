@@ -1,6 +1,11 @@
 @extends('layaouts.admin')
 @section('content')
 
+    {!! Form::open(['route'=>'usuario.store','method'=>'POST']) !!}
+        @include('usuario.forms.usr') <!--Introducimo el formulario definido en usuario/forms/usr.blade.php-->
+        {!! Form::submit('Registrar',['class'=>'btn btn-primary']) !!}
+    {!! Form::close() !!}
+<!--
     <form action="">
         <div class="form-group">
         <label form="">Nombre</label>
@@ -27,5 +32,5 @@
 
 
     </form>
-
+-->
 @stop
