@@ -25,6 +25,7 @@
         <th>Operacion</th>
 
         </thead>
+
        @foreach($users as $user)
         <tbody>
             <td>{{$user->name}}</td>
@@ -46,5 +47,7 @@
         </tbody>
         @endforeach
     </table>
+    {!! $users->render() !!}<!--esta funcion nos permite renderizar la lista de usuarios para paginar su contenido
 
  @stop
+

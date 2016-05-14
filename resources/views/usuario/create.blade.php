@@ -1,8 +1,11 @@
+<!-- Aqui se define de que template esta heredando esta vista-->
 @extends('layaouts.admin')
+<!---- Todo el codigo a partir de aqui es incrustado en el template---->
 @section('content')
-
-    {!! Form::open(['route'=>'usuario.store','method'=>'POST']) !!}
-        @include('usuario.forms.usr') <!--Introducimo el formulario definido en usuario/forms/usr.blade.php-->
+        <!--Aqui incluye la alerta mostrando todos los errores de validacion que se encuentra en alerts/request.blade.php-->
+@include('alerts.request')
+    {!! Form::open(['route'=>'usuario.store','method'=>'POST']) !!} <!--Aqui se define que al hacer click al boton este se redirecciona al metodo store del UsuarioController pasando los valores mediate POST-->
+        @include('usuario.forms.usr') <!--Introducimos el formulario definido en usuario/forms/usr.blade.php-->
         {!! Form::submit('Registrar',['class'=>'btn btn-primary']) !!}
     {!! Form::close() !!}
 <!--

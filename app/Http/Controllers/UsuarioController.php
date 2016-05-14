@@ -5,6 +5,8 @@ namespace Cinema\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Cinema\Http\Requests;
+use Cinema\Http\Requests\UserCreateRequest;
+use Cinema\Http\Requests\UserUpdateRequest;// es preciso invocar los request para que lo pueda llamar
 //use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Process\Pipes\AbstractPipes;
 use Cinema\User;
@@ -21,8 +23,10 @@ class UsuarioController extends Controller
     public function index()
     {
        //$users=\Cinema\User::all();
-        $users=User::all();
-       return view('usuario.index',compact('users'));
+        //$users=User::all();//muestra todos los elementos de la tabla
+        $users=User::paginate(2);//muestra todos los elementos de la tabla paginado , 2 es el numero de elementos por pagina
+      //$users=User::onlyTrashed()->paginate(2); //Mostrando los elemntos elimnados
+        return view('usuario.index',compact('users'));
 
     }
 
@@ -44,16 +48,16 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request) //Ahora nuestro Request es cambiado por UsuarioCreateRequest para que agrege las validaciones definidas en ella (reglas de negocio)
     {
         //return("Aqui estoy");
         //\Cinema\User::create(
-        User::create(
+        User::create(   // esta funcion crea un nuevo objeto User y le pasa los valores iniciales
             [
              'name'=>$request['name'],
              'email'=>$request['email'],
              //'password'=>bcrypt( $request['password'])
-                'password'=>$request['password']  //poque en el modelo al setear el password ya se esta haciendo la conversion
+                'password'=>$request['password']  // Ya no se llama a la funcion de encriptacion bcryt  porque en el modelo se ha definido el set con la encriptacion del password
             ]);
 
         //return 'Usuario Registrado';
@@ -107,20 +111,24 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+
+    //public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id) //Ahora nuestro Request es cambiado por UsuarioUpdateRequest para que agrege las validaciones definidas en ella (reglas de negocio)
+
     {
         //
 
-        $user=User::find($id);
+        $user=User::find($id);  //obtiene el elemento con el codigo $id
 
 
-        $user->fill($request->all());
-        $user->save();
+        $user->fill($request->all()); //rellena todas las modificaciones hechas al registro, excepto el id
+        $user->save(); //luego ejecuta la actualizacion en la base de datos
 
         //return redirect('/usuario')->width('message','Usuario Actualizado Exitosamente');
 
-        Session::flash('message','Usuario editado correctamente');
-            return Redirect::to('/usuario');
+        Session::flash('message','Usuario editado correctamente'); //Guarda en la sesion la variable message con el valor 'usuario editado correcntamente'
+            return Redirect::to('/usuario'); // luego redirecciona al usuario.index con el mensaje
 
 
     }
@@ -134,8 +142,10 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        //User::destroy($id); destruir el recurso
 
+        $user=User::find($id);
+        $user->delete();
         Session::flash('message','Usuario eliminado correctamente');
         return Redirect::to('/usuario');
 

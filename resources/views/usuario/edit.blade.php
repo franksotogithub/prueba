@@ -1,6 +1,6 @@
 @extends('layaouts.admin')
 @section('content')
-
+@include('alerts.request')
 
     {!! Form::model($user,['route'=>['usuario.update',$user->id],'method'=>'PUT']) !!}
     @include('usuario.forms.usr')
