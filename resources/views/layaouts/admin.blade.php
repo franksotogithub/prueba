@@ -56,7 +56,7 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                  @if(Auth::user()->name=='administrador')
+
 
                     <li>
                         <a href="#"><i class="fa fa-users fa-fw"></i> Usuario<span class="fa arrow"></span></a>
@@ -70,7 +70,7 @@
                         </ul>
                     </li>
 
-                  @endif
+
                     <li>
                         <a href="#"><i class="fa fa-film fa-fw"></i> Pelicula<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -87,10 +87,10 @@
                         <a href="#"><i class="fa fa-child fa-fw"></i> Genero<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#"><i class='fa fa-plus fa-fw'></i> Agregar</a>
+                                <a href="{!! URL::to('/genero/create') !!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
                             </li>
                             <li>
-                                <a href="#"><i class='fa fa-list-ol fa-fw'></i> Generos</a>
+                                <a href="{!! URL::to('/genero') !!}"><i class='fa fa-list-ol fa-fw'></i> Generos</a>
                             </li>
                         </ul>
                     </li>
@@ -111,6 +111,9 @@
 {!!Html::script('js/metisMenu.min.js')!!}
 {!!Html::script('js/sb-admin-2.js')!!}
 
+
+@section('scripts') <!--debido a que solo el archivo js script lo vamos a utilizar para la crecacion de genero vamos a incrustarlo en la seccion de script , solo en el archivo create-->
+@show
 
 </body>
 

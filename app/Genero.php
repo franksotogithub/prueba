@@ -8,7 +8,8 @@ class Genero extends Model
 {
     //
 
-    protected $table="genero";
+    protected $table="generos";
     public $timestamps=false;
 
+    public $fillable=['genero'];
 }
