@@ -13,6 +13,13 @@ class FrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function __construct() /*generamos un contructor y definimos dentro el midlerare (un control de peticiones)*/
+    {
+        $this->middleware('auth',['only'=>'admin']);  //aplicas el middleware auth y solo a la ruta del /admin
+    }
+
     public function index()
     {
         return view('index');

@@ -44,8 +44,10 @@ Route::get('edad/{edad?}', function ($edad=10) {
 
 
 Route::resource('usuario','UsuarioController');
+Route::resource('log','LogController');
+Route::get('logout','LogController@logout');
 
-
+Route::resource('genero','GeneroController');
 
 
 

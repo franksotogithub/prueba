@@ -12,14 +12,49 @@ use Symfony\Component\Process\Pipes\AbstractPipes;
 use Cinema\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Routing\Route; //estas libreria nos sirve para facilitar obtener parametros que se encuentran dentro de nuestra ruta
 
 class UsuarioController extends Controller
 {
+
+/*******Hay que notar que se repite mucho el uso del find($id) que sirve para ubicar el elemento por el id , si queremos reducir esto se puede hacer de la siguiente forma:**/
+
+
+    /********Ya no existe******/
+    /*
+    public function  __construct()
+    {
+        $this->beforeFilter('@find',['only'=>['edit','update','destroy']]);  //esto es un filtro que ejecuta un proceso antes de llamar a nuestro controlador
+                                            //@find hace referencia al nombre del metodo que se ejecutara en el filtro , las opciones entre  [] defienen los metodos donde se ejecutara el metodo find
+    }
+
+*/
+
+
+
+    public function  __construct()
+    {
+
+        $this->middleware('auth');  //protegemmos con el middleware auth al controlador de usuario en todo el controlador
+
+
+        $this->middleware('admin',['only'=>['create','edit']]); //p`rotegemos con este middleware creado los accesos del usuario para crear o editar
+        //@find hace referencia al nombre del metodo que se ejecutara en el filtro , las opciones entre  [] defienen los metodos donde se ejecutara el metodo find
+    }
+    public function find(Route $route)
+    {
+        $this->user=User::find($route->getParameter('usuario'));
+    return $route->getParameter('usuario');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function index()
     {
        //$users=\Cinema\User::all();
@@ -52,6 +87,8 @@ class UsuarioController extends Controller
     {
         //return("Aqui estoy");
         //\Cinema\User::create(
+
+      /******************Esta forma ya no esta en 5.2 funciona en 5.1,
         User::create(   // esta funcion crea un nuevo objeto User y le pasa los valores iniciales
             [
              'name'=>$request['name'],
@@ -59,6 +96,20 @@ class UsuarioController extends Controller
              //'password'=>bcrypt( $request['password'])
                 'password'=>$request['password']  // Ya no se llama a la funcion de encriptacion bcryt  porque en el modelo se ha definido el set con la encriptacion del password
             ]);
+
+***************************/
+/*************Esta forma rduce el codigo**************/
+        User::create($request->all()
+            );
+
+
+
+
+
+
+
+
+
 
         //return 'Usuario Registrado';
 //1ra forma

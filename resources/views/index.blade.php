@@ -1,5 +1,7 @@
 @extends('layaouts.principal')
 @section('content')
+@include('alerts.errors')
+@include('alerts.request')
     <div class="header">
         <div class="top-header">
             <div class="logo">
@@ -15,7 +17,20 @@
             <div class="clearfix"></div>
         </div>
         <div class="header-info">
-            <h1>BIG HERO 6</h1>
+           <h1>BIG HERO 6</h1>
+           {!! Form::open(['route'=>'log.store','method'=>'POST']) !!}
+                <div class="form-group">
+                   {!! Form::label('correo','Correo:')!!}
+                    {!! Form::email('email',null,['class'=>'form-control','placeholder'=>'Ingrese su correo'])!!}
+                </div>
+                <div class="form-group">
+                {!! Form::label('contraseña','Contraseña:')!!}
+                {!! Form::password('password',['class'=>'form-control','placeholder'=>'Ingrese su contraseña'])!!}
+                </div>
+            {!! Form::submit('Iniciar',['class'=>'btn btn-primary'])!!}
+
+           {!! Form::close() !!}
+           <!--
             <p class="age"><a href="#">All Age</a> Don Hall, Chris Williams</p>
             <p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>
             <p class="review reviewgo">Genre	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; Animation, Action, Comedy</p>
@@ -23,6 +38,8 @@
             <p class="special">The special bond that develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes.</p>
             <a class="video" href="#"><i class="video1"></i>WATCH TRAILER</a>
             <a class="book" href="#"><i class="book1"></i>BOOK TICKET</a>
+
+        -->
         </div>
     </div>
     <div class="review-slider">
