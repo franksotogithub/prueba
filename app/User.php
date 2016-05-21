@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+/**Esta funcion se crea para encriptar la clave ingresada**/
     public function setPasswordAttribute($valor){
         if(!empty($valor)){
             $this->attributes['password']=\Hash::make($valor);

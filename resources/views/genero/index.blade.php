@@ -6,7 +6,10 @@
 
     </div>
 
+    <div id="msj-success-delete" class="alert alert-success alert-dismissable" role="alert" style="display:none ">
+        <strong>Genero eliminado correctamente</strong>
 
+    </div>
 
     <table class="table">
         <thead>

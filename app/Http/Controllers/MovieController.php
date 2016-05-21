@@ -2,8 +2,9 @@
 
 namespace Cinema\Http\Controllers;
 
+use Cinema\Genero;
 use Illuminate\Http\Request;
-
+use Cinema\Movie;
 use Cinema\Http\Requests;
 
 class MovieController extends Controller
@@ -14,9 +15,11 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {$movies =Movie::Movies();
 
-        return "Estoy en el index";
+
+        return $movies;
+        return view('pelicula.index',compact('movies'));
         //
     }
 
@@ -29,7 +32,10 @@ class MovieController extends Controller
     {
         //
 
-        return "Esto seria el formulario para crear";
+        //return "Esto seria el formulario para crear";
+
+        $generos=Genero::lists('genero','id');
+        return view('pelicula.create',compact('generos'));
     }
 
     /**
@@ -40,6 +46,8 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        Movie::create($request->all());
+        return "Listo";
         //
     }
 

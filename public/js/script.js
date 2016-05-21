@@ -17,8 +17,15 @@ function()
         success:function(){
             $('#msj-success').fadeIn();
 
+        },
+        error:function(msj){
+           //console.log(msj.responseJSON.genero);
+            $('#msj-error').fadeIn();
+            $('#msj-error').html("<strong>"+msj.responseJSON.genero+"</strong>");
         }
     });
+
+
 
 }
 

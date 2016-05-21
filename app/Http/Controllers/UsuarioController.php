@@ -55,12 +55,17 @@ class UsuarioController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request)
     {
        //$users=\Cinema\User::all();
         //$users=User::all();//muestra todos los elementos de la tabla
         $users=User::paginate(2);//muestra todos los elementos de la tabla paginado , 2 es el numero de elementos por pagina
       //$users=User::onlyTrashed()->paginate(2); //Mostrando los elemntos elimnados
+
+        if($request->ajax())
+        {return response()->json(view('usuario.users',compact('users'))->render());
+        }
+
         return view('usuario.index',compact('users'));
 
     }

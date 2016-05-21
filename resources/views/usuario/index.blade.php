@@ -18,6 +18,8 @@
 @endif
 
 @section('content')
+ <div class="users">
+
     <table class="table">
         <thead>
         <th>Nombre</th>
@@ -47,7 +49,13 @@
         </tbody>
         @endforeach
     </table>
-    {!! $users->render() !!}<!--esta funcion nos permite renderizar la lista de usuarios para paginar su contenido
 
- @stop
+
+    {!! $users->render() !!}<!--esta funcion nos permite renderizar la lista de usuarios para paginar su contenido-->
+    </div>
+@endsection
+@section('scripts')
+    {!! Html::script('js/script3.js') !!}
+@endsection
+
 

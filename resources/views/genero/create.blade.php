@@ -7,6 +7,10 @@
     </div>
 
 
+    <div id="msj-error" class="alert alert-danger alert-dismissable" role="alert" style="display:none ">
+
+    </div>
+
 <input type="hidden" name="_token" value="{{csrf_token()}}" id="token">
 @include('genero.form.genero')
 {!! link_to('#',$title='Registrar',$atributes=['id'=>'registro','class'=>'btn btn-primary'],$secure=null) !!}

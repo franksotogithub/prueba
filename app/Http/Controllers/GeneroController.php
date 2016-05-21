@@ -5,6 +5,7 @@ use Cinema\Genero;
 use Illuminate\Http\Request;
 
 use Cinema\Http\Requests;
+use Cinema\Http\Requests\GeneroRequest;
 
 class GeneroController extends Controller
 {
@@ -26,7 +27,7 @@ class GeneroController extends Controller
         return  response()->json($generos->toArray());
     }
 
-    public function store(Request $request)
+    public function store(GeneroRequest $request)
     {
 
         if($request->ajax()){
@@ -48,12 +49,22 @@ class GeneroController extends Controller
 
     
 
-    public function update(Request $request,$id)
+    public function update(GeneroRequest $request,$id)
     {$genre=Genero::find($id);
         $genre->fill($request->all());
     $genre->save();
         return response()->json(["mensaje"=>"listo"]);
     }
-    
-    
+
+
+    public function destroy($id)
+    {//Genero::destroy($id);
+      $genero=Genero::find($id);
+      $genero->delete();
+      //Session::flash('message','Genero eliminado correctamente');
+      //return redirect()->to('/genero');
+        return response()->json(["mensaje"=>"borrado"]);
+        //Soft deleted
+
+    }
 }

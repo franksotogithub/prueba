@@ -45,7 +45,8 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            //'root' => storage_path('app'),
+            'root' => public_path('movies'), //de esta manera configuramos que la carpeta en donde se va a almacenar los archivos es en la capeta public/movies
         ],
 
         'public' => [
