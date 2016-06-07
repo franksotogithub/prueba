@@ -6,6 +6,10 @@ use Cinema\Genero;
 use Illuminate\Http\Request;
 use Cinema\Movie;
 use Cinema\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+
 
 class MovieController extends Controller
 {
@@ -18,7 +22,7 @@ class MovieController extends Controller
     {$movies =Movie::Movies();
 
 
-        return $movies;
+        //return $movies;
         return view('pelicula.index',compact('movies'));
         //
     }
@@ -47,7 +51,8 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         Movie::create($request->all());
-        return "Listo";
+        Session::flash('message','Pelicula Creada Correctamente');
+        return Redirect::to('/pelicula');
         //
     }
 
@@ -69,8 +74,9 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   $movie=Movie::find($id);
+        $generos=Genero::lists('genero','id'); // lista los generos en forma de diccionario el genero es el contenido
+        return view('pelicula.edit',['movie'=>$movie,'generos'=>$generos]);
     }
 
     /**
@@ -83,6 +89,12 @@ class MovieController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $movie=Movie::find($id);
+        $movie->fill($request->all());
+        $movie->save();
+        Session::flash('message','Pelicula Editada Correctamente');
+        return Redirect::to('/pelicula');
     }
 
     /**
@@ -94,5 +106,13 @@ class MovieController extends Controller
     public function destroy($id)
     {
         //
+
+        $movie=Movie::find($id);
+        Storage::delete($movie->path);
+        $movie->delete();
+
+        Session::flash('message','Pelicula Eliminada Correctamente');
+        return Redirect::to('/pelicula');
+
     }
 }

@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),// aqui configuramos el host de mail a la cual vamos a enviar correo
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,8 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    //'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 465), //puerto del correo gmail
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +56,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'franksoto2012@gmail.com', 'name' => 'frank'], //
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +69,8 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    //'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
 
     /*
     |--------------------------------------------------------------------------

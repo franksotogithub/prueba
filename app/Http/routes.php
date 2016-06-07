@@ -51,4 +51,7 @@ Route::resource('genero','GeneroController');
 Route::get('generos','GeneroController@listing');
 
 Route::resource('pelicula','MovieController');
+Route::resource('mail','MailController');
 
+Route::get('password/email','Auth\PasswordController@getEmail');//muestra la vista
+Route::post('password/email','Auth\PasswordController@getEmail');//procesa

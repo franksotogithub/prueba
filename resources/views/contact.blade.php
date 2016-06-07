@@ -19,18 +19,28 @@
         <h3 class="head">CONTACT</h3>
         <p>WE'RE ALWAYS HERE TO HELP YOU</p>
         <div class="contact-form">
-            <form>
+
+
+                {!! Form::open(['route'=>'mail.store','method'=>'POST']) !!}
                 <div class="col-md-6 contact-left">
-                    <input type="text" placeholder="Name" required/>
-                    <input type="text" placeholder="E-mail" required/>
-                    <input type="text" placeholder="Phone" required/>
+
+                    <!--<input type="text" placeholder="E-mail" required/>
+                    <input type="text" placeholder="Phone" required/>-->
+                  {!! Form::text('name',null,['placeholder'=>'Nombre']) !!}
+                    {!! Form::text('email',null,['placeholder'=>'Email']) !!}
+
                 </div>
                 <div class="col-md-6 contact-right">
-                    <textarea placeholder="Message"></textarea>
-                    <input type="submit" value="SEND"/>
+                    <!--<textarea placeholder="Message"></textarea>
+                    <input type="submit" value="SEND"/>-->
+
+                    {!! Form::textarea('mensaje',null,['placeholder'=>'Mensaje']) !!}
                 </div>
+                {!! Form::submit('SEND') !!}
+                {!! Form::close() !!}
+
                 <div class="clearfix"></div>
-            </form>
+
         </div>
     </div>
 </div>

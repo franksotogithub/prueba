@@ -30,6 +30,8 @@
             {!! Form::submit('Iniciar',['class'=>'btn btn-primary'])!!}
 
            {!! Form::close() !!}
+            {!! link_to('password/email',$title="Olvidaste tu contraseña",$atributes=null,$secure=null) !!}
+
            <!--
             <p class="age"><a href="#">All Age</a> Don Hall, Chris Williams</p>
             <p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>
